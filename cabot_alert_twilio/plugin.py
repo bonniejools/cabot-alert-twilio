@@ -51,7 +51,7 @@ class TwilioPhoneCallAlert(AlertPlugin):
         auth_token  = env.get('TWILIO_AUTH_TOKEN')
         outgoing_number = env.get('TWILIO_OUTGOING_NUMBER')
         url = 'http://%s%s' % (settings.WWW_HTTP_HOST,
-                               reverse('twiml-callback', kwargs={'service_id': service.id}))
+            reverse('twiml-callback', kwargs={'service_id': service.id}))
 
         # No need to call to say things are resolved
         if service.overall_status != service.CRITICAL_STATUS:
@@ -87,7 +87,6 @@ class TwilioSMSAlert(AlertPlugin):
     ]
 
     def send_alert(self, service, users, duty_officers):
-
         account_sid = env.get('TWILIO_ACCOUNT_SID')
         auth_token  = env.get('TWILIO_AUTH_TOKEN')
         outgoing_number = env.get('TWILIO_OUTGOING_NUMBER')
@@ -96,8 +95,8 @@ class TwilioSMSAlert(AlertPlugin):
 
         client = TwilioRestClient(
             account_sid, auth_token)
-	twilio_phone_plugin = AlertPluginModel.objects.get(slug='twilio_phone')
-	mobiles = [twilio_phone_plugin.get_user_variable(u, 'phone_number') for u in users]
+	mobiles = [u.twilio_phone_settings.phone_number for u in users]
+
         c = Context({
             'service': service,
             'host': settings.WWW_HTTP_HOST,
