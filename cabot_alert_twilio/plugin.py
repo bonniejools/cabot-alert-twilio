@@ -35,6 +35,7 @@ class TwilioPhoneCallAlert(AlertPlugin):
     slug = "twilio_phone"
     author = "Jonathan Balls"
     version = "0.0.1"
+    font_icon = "fa fa-phone"
 
     plugin_variables = [
         'TWILIO_ACCOUNT_SID',
@@ -58,7 +59,7 @@ class TwilioPhoneCallAlert(AlertPlugin):
         client = TwilioRestClient(
             account_sid, auth_token)
 
-	mobiles = [self.plugin_model.get_user_variable(u, 'phone_number') for u in users]
+	mobiles = [u.twilio_phone_settings.phone_number for u in users]
 
         for mobile in mobiles:
             try:
@@ -77,6 +78,7 @@ class TwilioSMSAlert(AlertPlugin):
     slug = "twilio_sms"
     author = "Jonathan Balls"
     version = "0.0.1"
+    font_icon = "fa fa-phone"
 
     plugin_variables = [
         'TWILIO_ACCOUNT_SID',
