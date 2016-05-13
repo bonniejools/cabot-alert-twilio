@@ -15,11 +15,11 @@ class TestTwilioPhoneCallAlert(LocalTestCase):
         super(TestTwilioPhoneCallAlert, self).setUp()
 
         self.twilio_call_alert, created = AlertPluginModel.objects.get_or_create(
-                slug='twilio_phone')
+                slug='cabot_alert_twilio_phone')
 
         u = User.objects.get(pk=self.user.pk)
         self.user_phone_number = '+123456789'
-        u.twilio_phone_settings.phone_number = self.user_phone_number
+        u.cabot_alert_twilio_phone_settings.phone_number = self.user_phone_number
         
         self.service.users_to_notify.add(self.user)
         self.service.alerts.add(self.twilio_call_alert)
@@ -58,12 +58,14 @@ class TestTwilioSMSAlert(LocalTestCase):
     def setUp(self):
         super(TestTwilioSMSAlert, self).setUp()
 
+        self.twilio_call_alert, created = AlertPluginModel.objects.get_or_create(
+                slug='cabot_alert_twilio_phone')
         self.twilio_sms_alert, created = AlertPluginModel.objects.get_or_create(
-                slug='twilio_sms')
+                slug='cabot_alert_twilio_sms')
 
         u = User.objects.get(pk=self.user.pk)
         self.user_phone_number = '+123456789'
-        u.twilio_phone_settings.phone_number = self.user_phone_number
+        u.cabot_alert_twilio_phone_settings.phone_number = self.user_phone_number
         
         self.service.users_to_notify.add(self.user)
         self.service.alerts.add(self.twilio_sms_alert)

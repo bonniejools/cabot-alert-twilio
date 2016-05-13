@@ -32,7 +32,7 @@ class TwilioUserSettingsForm(forms.Form):
 
 class TwilioPhoneCallAlert(AlertPlugin):
     name = "Twilio Phone Call"
-    slug = "twilio_phone"
+    slug = "cabot_alert_twilio_phone"
     author = "Jonathan Balls"
     version = "0.0.1"
     font_icon = "fa fa-phone"
@@ -59,7 +59,7 @@ class TwilioPhoneCallAlert(AlertPlugin):
         client = TwilioRestClient(
             account_sid, auth_token)
 
-	mobiles = [u.twilio_phone_settings.phone_number for u in users]
+	mobiles = [u.cabot_alert_twilio_phone_settings.phone_number for u in users]
 
         for mobile in mobiles:
             try:
@@ -75,7 +75,7 @@ class TwilioPhoneCallAlert(AlertPlugin):
 
 class TwilioSMSAlert(AlertPlugin):
     name = "Twilio SMS"
-    slug = "twilio_sms"
+    slug = "cabot_alert_twilio_sms"
     author = "Jonathan Balls"
     version = "0.0.1"
     font_icon = "fa fa-phone"
@@ -95,7 +95,7 @@ class TwilioSMSAlert(AlertPlugin):
 
         client = TwilioRestClient(
             account_sid, auth_token)
-	mobiles = [u.twilio_phone_settings.phone_number for u in users]
+	mobiles = [u.cabot_alert_twilio_phone_settings.phone_number for u in users]
 
         c = Context({
             'service': service,
