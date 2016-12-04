@@ -50,7 +50,7 @@ class TwilioPhoneCallAlert(AlertPlugin):
         account_sid = env.get('TWILIO_ACCOUNT_SID')
         auth_token  = env.get('TWILIO_AUTH_TOKEN')
         outgoing_number = env.get('TWILIO_OUTGOING_NUMBER')
-        url = 'http://%s%s' % (settings.WWW_HTTP_HOST,
+        url = '%s://%s%s' % (settings.WWW_SCHEME, settings.WWW_HTTP_HOST,
             reverse('twiml-callback', kwargs={'service_id': service.id}))
 
         # No need to call to say things are resolved
